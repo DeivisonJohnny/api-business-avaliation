@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from 'src/prisma/prisma.service';
-import Util from '../utils/Util';
+import UtilService from 'src/utils/utils';
 
 @Injectable()
 export class AuthRepository {
-  constructor(private readonly prisma: Prisma) {}
+  constructor(
+    private readonly prisma: Prisma,
+    private readonly util: UtilService,
+  ) {}
 
   async findUserByUsername(username: string) {
     return this.prisma.user.findFirst({
@@ -24,6 +27,6 @@ export class AuthRepository {
     storedPassword: string,
     inputPassword: string,
   ): Promise<boolean> {
-    return Util.checkHash(inputPassword, storedPassword);
+    return this.util.checkHash(inputPassword, storedPassword);
   }
 }
