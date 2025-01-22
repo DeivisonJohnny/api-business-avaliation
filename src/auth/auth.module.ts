@@ -18,6 +18,6 @@ import UtilService from 'src/utils/utils';
   ],
   controllers: [AuthController],
   providers: [AuthService, TokenService, UtilService, AuthRepository, Prisma],
-  exports: [AuthService],
+  exports: [AuthService, TokenService],
 })
 export class AuthModule {}
