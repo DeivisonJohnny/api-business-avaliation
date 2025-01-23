@@ -21,4 +21,10 @@ model Role {
   name  String
   level Int?
   users User[]
+  capabilities Capability[]
+}
+
+model Capability {
+  id String @id @default(uuid())
+  roles Role[]
 }
