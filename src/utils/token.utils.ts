@@ -38,4 +38,30 @@ export default class TokenService {
       );
     }
   }
+
+  getTimeExpire(token: string): {
+    hours: number;
+    minutes: number;
+    seconds: number;
+  } {
+    const {
+      payload: { exp },
+    } = this.jwtService.decode(token, {
+      complete: true,
+    });
+    console.log('🚀 ~ TokenService ~ getTimeExpire ~ exp:', exp);
+
+    const expirationDate = new Date(exp * 1000);
+    const now = new Date();
+
+    const differenceInMilliseconds = expirationDate.getTime() - now.getTime();
+
+    const hours = Math.floor(differenceInMilliseconds / (1000 * 60 * 60));
+    const minutes = Math.floor(
+      (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60),
+    );
+    const seconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+
+    return { hours: hours, minutes: minutes, seconds: seconds };
+  }
 }
