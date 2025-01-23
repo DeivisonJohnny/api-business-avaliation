@@ -49,7 +49,6 @@ export default class TokenService {
     } = this.jwtService.decode(token, {
       complete: true,
     });
-    console.log('🚀 ~ TokenService ~ getTimeExpire ~ exp:', exp);
 
     const expirationDate = new Date(exp * 1000);
     const now = new Date();
