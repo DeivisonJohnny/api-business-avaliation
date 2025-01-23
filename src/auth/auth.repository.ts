@@ -15,9 +15,6 @@ export class AuthRepository {
         id: true,
         username: true,
         password: true,
-        name: true,
-        surname: true,
-        role: true,
       },
       where: { username },
     });
