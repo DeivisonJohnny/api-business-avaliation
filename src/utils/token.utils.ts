@@ -22,7 +22,7 @@ export default class TokenService {
     return this.jwtService.sign(payload, options);
   }
 
-  getData<T extends object>(token: string): T {
+  verify<T extends object>(token: string): T {
     try {
       return this.jwtService.verify<T>(token, { secret: this.tokenSecret });
     } catch (error) {

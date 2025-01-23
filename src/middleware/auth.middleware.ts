@@ -25,7 +25,7 @@ export class AuthMiddleware implements NestMiddleware {
       );
     }
 
-    this.token.getData(tokenReq); //Vai verificar se o token é valido
+    this.token.verify(tokenReq);
 
     next();
   }
