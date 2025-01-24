@@ -1,6 +1,9 @@
 {
-    "editor.action.toggleWordWrap": "auto",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.wordWrap": "wordWrapColumn",
+  "editor.action.toggleWordWrap": "auto",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "wordWrapColumn",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }
