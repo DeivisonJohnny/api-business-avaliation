@@ -76,11 +76,6 @@ async function main() {
       sector: faker.commerce.department(),
       assessable: false,
       imgProfile: faker.image.avatar(),
-      roles: {
-        connect: {
-          id: faker.helpers.arrayElement(['employee', 'supervisor']),
-        },
-      },
     });
   }
 

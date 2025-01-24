@@ -1,4 +1,4 @@
-import * as PrismaTypes from '@prisma/client';
+import { Role } from '@prisma/client';
 
 export default interface IEmployee {
   id?: string;
@@ -8,8 +8,6 @@ export default interface IEmployee {
   shift: string;
   sector: string;
   assessable: boolean;
-  roles?:
-    | PrismaTypes.Role
-    | PrismaTypes.Prisma.RoleEmployeesCreateNestedOneWithoutEmployeeInput;
+  roles?: Role;
   imgProfile: string;
 }
