@@ -28,3 +28,23 @@ model Capability {
   id String @id @default(uuid())
   roles Role[]
 }
+
+model Employee {
+  id String @id @default(uuid())
+  name       String
+  surname    String
+  cpf        String @unique
+  shift      String
+  sector     String
+  assessable Boolean
+  roleId String 
+  roles RoleEmployees @relation(fields: [roleId], references: [id])
+  imgProfile String
+}
+ 
+
+model RoleEmployees {
+  id String @id @default(uuid())
+  name String
+  Employee Employee[]
+}

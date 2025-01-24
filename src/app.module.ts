@@ -4,11 +4,13 @@ import configuration from './config/configuration';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthMiddleware } from './middleware/auth.middleware';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
   imports: [
     PrismaModule,
     AuthModule,
+    EmployeeModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],

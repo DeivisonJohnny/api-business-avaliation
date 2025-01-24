@@ -1,6 +1,9 @@
 import * as PrismaTypes from '@prisma/client';
 import { CAPABILITIES } from '../src/utils/constants.utils';
 import UtilService from '../src/utils/utils';
+import IEmployee from 'src/employee/interface/IEmployee';
+import { faker } from '@faker-js/faker';
+import { randomUUID } from 'crypto';
 const Prisma = new PrismaTypes.PrismaClient();
 
 async function main() {
@@ -45,6 +48,65 @@ async function main() {
     create: userAdmin,
     update: userAdmin,
   });
+
+  const rolesEmployee: PrismaTypes.Prisma.RoleEmployeesCreateInput[] = [
+    { id: 'employee', name: 'Funcionario' },
+    { id: 'supervisor', name: 'Supervisor' },
+  ];
+
+  await Promise.all(
+    rolesEmployee.map((role) =>
+      Prisma.roleEmployees.upsert({
+        where: { id: role.id },
+        create: role,
+        update: role,
+      }),
+    ),
+  );
+
+  const employee: IEmployee[] = [];
+
+  for (let i = 0; i < 30; i++) {
+    employee.push({
+      id: randomUUID().toString(),
+      name: faker.person.firstName(),
+      surname: faker.person.lastName(),
+      cpf: faker.string.numeric(11),
+      shift: faker.helpers.arrayElement(['morning', 'afternoon', 'night']),
+      sector: faker.commerce.department(),
+      assessable: false,
+      imgProfile: faker.image.avatar(),
+      roles: {
+        connect: {
+          id: faker.helpers.arrayElement(['employee', 'supervisor']),
+        },
+      },
+    });
+  }
+
+  await Promise.all(
+    employee.map(async (employee) => {
+      await Prisma.employee.upsert({
+        where: { id: employee.id },
+        create: {
+          ...employee,
+          roles: {
+            connect: {
+              id: faker.helpers.arrayElement(['employee', 'supervisor']),
+            },
+          },
+        },
+        update: {
+          ...employee,
+          roles: {
+            connect: {
+              id: faker.helpers.arrayElement(['employee', 'supervisor']),
+            },
+          },
+        },
+      });
+    }),
+  );
 }
 
 main();
