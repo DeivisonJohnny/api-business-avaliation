@@ -17,34 +17,39 @@ model User {
 }
 
 model Role {
-  id    String @id @default(uuid())
-  name  String
-  level Int?
-  users User[]
+  id           String       @id @default(uuid())
+  name         String
+  level        Int?
+  users        User[]
   capabilities Capability[]
 }
 
 model Capability {
-  id String @id @default(uuid())
+  id    String @id @default(uuid())
   roles Role[]
 }
 
 model Employee {
-  id String @id @default(uuid())
+  id         String        @id @default(uuid())
   name       String
   surname    String
-  cpf        String @unique
-  shift      String
+  cpf        String        @unique
+  shift      Shift         @default(MANHÃ)
   sector     String
   assessable Boolean
-  roleId String 
-  roles RoleEmployees @relation(fields: [roleId], references: [id])
-  imgProfile String
+  roleId     String
+  role       RoleEmployees @relation(fields: [roleId], references: [id])
+  imgProfile String?
 }
- 
 
 model RoleEmployees {
-  id String @id @default(uuid())
-  name String
+  id       String     @id @default(uuid())
+  name     String
   Employee Employee[]
+}
+
+enum Shift {
+  TARDE
+  NOITE
+  MANHÃ
 }

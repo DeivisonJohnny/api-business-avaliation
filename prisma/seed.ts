@@ -72,7 +72,7 @@ async function main() {
       name: faker.person.firstName(),
       surname: faker.person.lastName(),
       cpf: faker.string.numeric(11),
-      shift: faker.helpers.arrayElement(['morning', 'afternoon', 'night']),
+      shift: faker.helpers.arrayElement(Object.values(PrismaTypes.Shift)),
       sector: faker.commerce.department(),
       assessable: false,
       imgProfile: faker.image.avatar(),
@@ -85,7 +85,7 @@ async function main() {
         where: { id: employee.id },
         create: {
           ...employee,
-          roles: {
+          role: {
             connect: {
               id: faker.helpers.arrayElement(['employee', 'supervisor']),
             },
@@ -93,7 +93,7 @@ async function main() {
         },
         update: {
           ...employee,
-          roles: {
+          role: {
             connect: {
               id: faker.helpers.arrayElement(['employee', 'supervisor']),
             },

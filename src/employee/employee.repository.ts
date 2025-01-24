@@ -9,4 +9,21 @@ export default class EmployeeRepository {
   async getAllEmployees(): Promise<IEmployee[]> {
     return await this.prisma.employee.findMany();
   }
+
+  async getEmployeByCPF(cpf: string): Promise<IEmployee> {
+    return await this.prisma.employee.findUnique({ where: { cpf: cpf } });
+  }
+
+  async createEmployee(employee: IEmployee): Promise<IEmployee> {
+    try {
+      const { role, ...otherdData } = employee;
+
+      return await this.prisma.employee.create({
+        data: { ...otherdData, roleId: role.id },
+      });
+    } catch (error) {
+      console.log('🚀 ~ EmployeeRepository ~ createEmployee ~ error:', error);
+      throw new Error('Erro inesperado - ->' + error);
+    }
+  }
 }

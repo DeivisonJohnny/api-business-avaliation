@@ -1,13 +1,13 @@
-import { Role } from '@prisma/client';
+import { RoleEmployees, Shift } from '@prisma/client';
 
 export default interface IEmployee {
   id?: string;
   name: string;
   surname: string;
   cpf: string;
-  shift: string;
+  shift?: Shift;
   sector: string;
   assessable: boolean;
-  roles?: Role;
+  role?: RoleEmployees;
   imgProfile: string;
 }
