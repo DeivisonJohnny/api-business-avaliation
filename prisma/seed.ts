@@ -84,7 +84,14 @@ async function main() {
       await Prisma.employee.upsert({
         where: { id: employee.id },
         create: {
-          ...employee,
+          id: employee.id,
+          name: employee.name,
+          surname: employee.surname,
+          cpf: employee.cpf,
+          shift: employee.shift,
+          sector: employee.sector,
+          assessable: employee.assessable,
+          imgProfile: employee.imgProfile,
           role: {
             connect: {
               id: faker.helpers.arrayElement(['employee', 'supervisor']),
@@ -92,7 +99,14 @@ async function main() {
           },
         },
         update: {
-          ...employee,
+          id: employee.id,
+          name: employee.name,
+          surname: employee.surname,
+          cpf: employee.cpf,
+          shift: employee.shift,
+          sector: employee.sector,
+          assessable: employee.assessable,
+          imgProfile: employee.imgProfile,
           role: {
             connect: {
               id: faker.helpers.arrayElement(['employee', 'supervisor']),
