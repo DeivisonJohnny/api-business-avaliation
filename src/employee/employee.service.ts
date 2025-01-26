@@ -33,14 +33,12 @@ export default class EmployeeService {
     }
   }
 
-  async update(employeeData: IEmployee): Promise<IEmployee> {
-    if (!employeeData.cpf) {
+  async update(cpf: string, employeeData: IEmployee): Promise<IEmployee> {
+    if (!cpf) {
       throw new HttpException('CPF is required', HttpStatus.BAD_REQUEST);
     }
 
-    const user = await this.employeeRepository.getEmployeeByCPF(
-      employeeData.cpf,
-    );
+    const user = await this.employeeRepository.getEmployeeByCPF(cpf);
 
     if (!user) {
       throw new HttpException('Employee not found', HttpStatus.NOT_FOUND);

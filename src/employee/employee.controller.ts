@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import EmployeeService from './employee.service';
 import IEmployee from './interface/IEmployee';
 
@@ -21,9 +21,12 @@ export default class EmployeeController {
     };
   }
 
-  @Put()
-  async updateEmployee(@Body() data: IEmployee): Promise<object> {
-    const response = await this.employeeService.update(data);
+  @Put(':cpf')
+  async updateEmployee(
+    @Param('cpf') cpf: string,
+    @Body() data: IEmployee,
+  ): Promise<object> {
+    const response = await this.employeeService.update(cpf, data);
     return {
       message: 'Employee updated with sucessfull',
       statusCode: 200,
