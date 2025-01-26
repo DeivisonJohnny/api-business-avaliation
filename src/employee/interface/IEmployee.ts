@@ -8,6 +8,7 @@ export default interface IEmployee {
   shift?: Shift;
   sector: string;
   assessable: boolean;
+  roleId?: string;
   role?: RoleEmployees;
   imgProfile: string;
 }
