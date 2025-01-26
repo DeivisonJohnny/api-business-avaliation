@@ -15,7 +15,7 @@ export default class EmployeeService {
   }
 
   async create(employeeData: IEmployee): Promise<IEmployee> {
-    const userCpf = await this.employeeRepository.getEmployeByCPF(
+    const userCpf = await this.employeeRepository.getEmployeeByCPF(
       employeeData.cpf,
     );
 
@@ -28,6 +28,31 @@ export default class EmployeeService {
 
     try {
       return await this.employeeRepository.createEmployee(employeeData);
+    } catch (error) {
+      throw new Error('Unexpected error - - -> ' + error);
+    }
+  }
+
+  async update(employeeData: IEmployee): Promise<IEmployee> {
+    if (!employeeData.cpf) {
+      throw new HttpException('CPF is required', HttpStatus.BAD_REQUEST);
+    }
+
+    const user = await this.employeeRepository.getEmployeeByCPF(
+      employeeData.cpf,
+    );
+
+    if (!user) {
+      throw new HttpException('Employee not found', HttpStatus.NOT_FOUND);
+    }
+
+    // preciso pegar role recebida da requisição e buscar no banco de dados para verificar se existe
+
+    try {
+      return await this.employeeRepository.updateAllFieldsEmployee(
+        user.id,
+        employeeData,
+      );
     } catch (error) {
       throw new Error('Unexpected error - - -> ' + error);
     }
