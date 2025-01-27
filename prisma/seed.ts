@@ -7,7 +7,7 @@ import { randomUUID } from 'crypto';
 const Prisma = new PrismaTypes.PrismaClient();
 
 async function main() {
-  const roles: PrismaTypes.Prisma.RoleCreateInput[] = [
+  const rolesUser: PrismaTypes.Prisma.RoleUserCreateInput[] = [
     {
       id: 'administrator',
       name: 'Administrador',
@@ -20,17 +20,19 @@ async function main() {
       },
     },
     {
-      id: 'employee',
-      name: 'Funcionario',
+      id: 'assistant',
+      name: 'Assistente',
     },
   ];
 
   await Promise.all(
-    roles.map((role) =>
-      Prisma.role.upsert({
-        where: { id: role.id },
-        create: role,
+    rolesUser.map((role) =>
+      Prisma.roleUser.upsert({
+        where: {
+          id: faker.helpers.arrayElement(['administrator', 'assistant']),
+        },
         update: role,
+        create: role,
       }),
     ),
   );
@@ -45,21 +47,21 @@ async function main() {
 
   await Prisma.user.upsert({
     where: { username: userAdmin.username },
-    create: userAdmin,
     update: userAdmin,
+    create: userAdmin,
   });
 
-  const rolesEmployee: PrismaTypes.Prisma.RoleEmployeesCreateInput[] = [
+  const roleForEmployees: PrismaTypes.Prisma.RoleCreateInput[] = [
     { id: 'employee', name: 'Funcionario' },
     { id: 'supervisor', name: 'Supervisor' },
   ];
 
   await Promise.all(
-    rolesEmployee.map((role) =>
-      Prisma.roleEmployees.upsert({
+    roleForEmployees.map((role) =>
+      Prisma.role.upsert({
         where: { id: role.id },
-        create: role,
         update: role,
+        create: role,
       }),
     ),
   );
@@ -92,11 +94,6 @@ async function main() {
           sector: employee.sector,
           assessable: employee.assessable,
           imgProfile: employee.imgProfile,
-          role: {
-            connect: {
-              id: faker.helpers.arrayElement(['employee', 'supervisor']),
-            },
-          },
         },
         update: {
           id: employee.id,
@@ -107,14 +104,40 @@ async function main() {
           sector: employee.sector,
           assessable: employee.assessable,
           imgProfile: employee.imgProfile,
-          role: {
-            connect: {
-              id: faker.helpers.arrayElement(['employee', 'supervisor']),
-            },
-          },
         },
       });
     }),
+  );
+
+  await Promise.all(
+    roleForEmployees.map((role) =>
+      Prisma.roleEmployees.upsert({
+        where: {
+          roleId: role.id,
+        },
+        create: {
+          roleId: role.id,
+        },
+        update: {
+          roleId: role.id,
+        },
+      }),
+    ),
+  );
+
+  await Promise.all(
+    employee.map((employee) =>
+      Prisma.employee.update({
+        data: {
+          rolesEmployee: {
+            connect: {
+              roleId: faker.helpers.arrayElement(['employee', 'supervisor']),
+            },
+          },
+        },
+        where: { id: employee.id },
+      }),
+    ),
   );
 }
 

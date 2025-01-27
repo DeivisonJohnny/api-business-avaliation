@@ -8,15 +8,15 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String     @id @default(uuid())
   name     String
   surname  String
-  username String @unique
+  username String     @unique
   password String
-  roles    Role[]
+  roles    RoleUser[]
 }
 
-model Role {
+model RoleUser {
   id           String       @id @default(uuid())
   name         String
   level        Int?
@@ -25,27 +25,34 @@ model Role {
 }
 
 model Capability {
-  id    String @id @default(uuid())
-  roles Role[]
+  id    String     @id @default(uuid())
+  roles RoleUser[]
 }
 
 model Employee {
-  id         String        @id @default(uuid())
-  name       String
-  surname    String
-  cpf        String        @unique
-  shift      Shift         @default(MANHÃ)
-  sector     String
-  assessable Boolean
-  roleId     String
-  role       RoleEmployees @relation(fields: [roleId], references: [id])
-  imgProfile String?
+  id              String         @id @default(uuid())
+  name            String
+  surname         String
+  cpf             String         @unique
+  shift           Shift          @default(MANHÃ)
+  sector          String
+  assessable      Boolean
+  imgProfile      String?
+  rolesEmployee   RoleEmployees? @relation(fields: [roleEmployeesId], references: [id])
+  roleEmployeesId String?
 }
 
 model RoleEmployees {
   id       String     @id @default(uuid())
-  name     String
-  Employee Employee[]
+  employee Employee[]
+  roleId   String     @unique
+  roles    Role       @relation(fields: [roleId], references: [id])
+}
+
+model Role {
+  id            String          @id @default(uuid())
+  name          String
+  rolesEmployee RoleEmployees[]
 }
 
 enum Shift {
