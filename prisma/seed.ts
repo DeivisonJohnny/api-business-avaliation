@@ -66,7 +66,7 @@ async function main() {
     ),
   );
 
-  const employee: IEmployee[] = [];
+  const employee: Partial<IEmployee>[] = [];
 
   for (let i = 0; i < 30; i++) {
     employee.push({
