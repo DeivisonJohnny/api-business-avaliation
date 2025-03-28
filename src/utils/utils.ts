@@ -10,4 +10,8 @@ export default class UtilService {
   async hash(value: string, salt = 8): Promise<string> {
     return bcrypt.hash(value, salt);
   }
+
+  removeFormatCpf(cpf: string): string {
+    return cpf.replace(/[^\d]/g, '');
+  }
 }

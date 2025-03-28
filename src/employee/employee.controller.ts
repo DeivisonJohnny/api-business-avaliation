@@ -3,10 +3,13 @@ import EmployeeService from './employee.service';
 import IEmployee from './interface/IEmployee';
 import { CreateEmployeeDto } from './DTO/CreateEmployee.dto';
 import { UpdateEmployeeDto } from './DTO/UpdateEmploee.dto';
-
+import UtilService from 'src/utils/utils';
 @Controller('employee')
 export default class EmployeeController {
-  constructor(private readonly employeeService: EmployeeService) {}
+  constructor(
+    private readonly employeeService: EmployeeService,
+    private readonly utilsService: UtilService,
+  ) {}
 
   @Get()
   async getListAllEmployees(): Promise<IEmployee[]> {
@@ -24,6 +27,7 @@ export default class EmployeeController {
     statusCode: number;
     data: Partial<IEmployee>;
   }> {
+    data.cpf = this.utilsService.removeFormatCpf(data.cpf);
     const response = await this.employeeService.create(data);
     return {
       message: 'Employee registed with sucessfull',
