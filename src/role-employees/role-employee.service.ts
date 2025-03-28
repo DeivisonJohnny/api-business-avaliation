@@ -34,6 +34,10 @@ export class RoleEmployeeService {
     }
   }
 
+  async getAll(): Promise<Partial<IRoleEmployee>[]> {
+    return await this.roleEmployee.getAllRoles();
+  }
+
   async getById(id: string): Promise<Partial<IRoleEmployee>> {
     const roleReplace = id.toLowerCase().replace(' ', '');
 

@@ -18,6 +18,12 @@ export default class RoleEmployeeRepository {
     });
   }
 
+  async getAllRoles(): Promise<Partial<IRoleEmployee>[]> {
+    return await this.prisma.roleEmployees.findMany({
+      select: { id: true, roles: true },
+    });
+  }
+
   async createNewRoleEmployee(idRole: string): Promise<Partial<IRoleEmployee>> {
     return await this.prisma.roleEmployees.create({ data: { roleId: idRole } });
   }

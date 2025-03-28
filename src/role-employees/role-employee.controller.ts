@@ -20,6 +20,11 @@ export class RoleEmployeeController {
     };
   }
 
+  @Get()
+  async getListAllRoleEmployee(): Promise<Partial<IRoleEmployee>[]> {
+    return await this.roleEmployeeService.getAll();
+  }
+
   @Get(':id')
   async getRoleByid(@Param('id') id: string): Promise<{
     message: string;
