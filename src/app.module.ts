@@ -7,6 +7,7 @@ import { AuthMiddleware } from './middleware/auth.middleware';
 import { EmployeeModule } from './employee/employee.module';
 import RoleEmployeeModule from './role-employees/role-employee.module';
 import { AvaliationModule } from './avaliation/avaliation.module';
+import SectorModule from './sector/sector.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AvaliationModule } from './avaliation/avaliation.module';
     EmployeeModule,
     RoleEmployeeModule,
     AvaliationModule,
+    SectorModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
