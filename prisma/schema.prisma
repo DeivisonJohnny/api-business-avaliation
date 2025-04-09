@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id       String     @id @default(uuid())
-  name     String
-  surname  String
-  username String     @unique
-  password String
-  roles    RoleUser[]
+  id          String        @id @default(uuid())
+  name        String
+  surname     String
+  username    String        @unique
+  password    String
+  roles       RoleUser[]
+  Avaliations Avaliations[]
 }
 
 model RoleUser {
@@ -59,4 +60,16 @@ enum Shift {
   TARDE
   NOITE
   MANHÃ
+}
+
+model Avaliations {
+  id String @id @default(uuid())
+
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  score   Float
+  comment String @db.VarChar(255)
+
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
 }
