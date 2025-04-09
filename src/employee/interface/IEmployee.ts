@@ -6,7 +6,8 @@ export default interface IEmployee {
   surname: string;
   cpf: string;
   shift?: Shift;
-  sector: string;
+  sector?: string;
+  sectorId?: string;
   assessable: boolean;
   roleEmployeesId: string;
   rolesEmployee: RoleEmployees | RoleEmployees[];
