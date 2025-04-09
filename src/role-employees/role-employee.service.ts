@@ -30,7 +30,7 @@ export class RoleEmployeeService {
       return role;
     } catch (error) {
       console.log('🚀 ~ Erro inesperado ao criar role:', error);
-      throw new Error('Erro inesperado  --> ' + error);
+      throw new Error('Erro inesperado  --> f' + error);
     }
   }
 
