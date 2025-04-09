@@ -36,11 +36,12 @@ model Employee {
   surname         String
   cpf             String         @unique
   shift           Shift          @default(MANHÃ)
-  sector          String
   assessable      Boolean
   imgProfile      String?
   rolesEmployee   RoleEmployees? @relation(fields: [roleEmployeesId], references: [id])
   roleEmployeesId String?
+  sector          Sector?        @relation(fields: [sectorId], references: [id])
+  sectorId        String?
 }
 
 model RoleEmployees {
@@ -54,6 +55,13 @@ model Role {
   id            String          @id @default(uuid())
   name          String
   rolesEmployee RoleEmployees[]
+}
+
+model Sector {
+  id   String @id @default(uuid())
+  name String
+
+  employees Employee[]
 }
 
 enum Shift {
