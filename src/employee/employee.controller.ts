@@ -16,9 +16,12 @@ export default class EmployeeController {
     return await this.employeeService.getAll();
   }
 
-  @Get(':cpf')
-  async getEmployeeByCPF(@Param('cpf') cpf: string): Promise<IEmployee> {
-    return await this.employeeService.getById(cpf);
+  @Get(':identification')
+  async getEmployeeByCPF(
+    @Param('identification') identification: string,
+  ): Promise<IEmployee> {
+    identification = this.utilsService.formatCPF(identification);
+    return await this.employeeService.getByIdentification(identification);
   }
 
   @Post()

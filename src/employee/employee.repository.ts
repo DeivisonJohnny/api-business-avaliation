@@ -14,9 +14,9 @@ export default class EmployeeRepository {
     });
   }
 
-  async getEmployeeByCPF(cpf: string): Promise<IEmployee> {
+  async getEmployeeCPFOrId(identification: string): Promise<IEmployee> {
     return await this.prisma.employee.findUnique({
-      where: { cpf: cpf },
+      where: { cpf: identification },
       include: {
         rolesEmployee: { include: { roles: true } },
       },

@@ -20,8 +20,9 @@ export default class EmployeeService {
     }
   }
 
-  async getById(cpf: string): Promise<IEmployee> {
-    const employee = await this.employeeRepository.getEmployeeByCPF(cpf);
+  async getByIdentification(identification: string): Promise<IEmployee> {
+    const employee =
+      await this.employeeRepository.getEmployeeCPFOrId(identification);
 
     if (!employee) {
       throw new HttpException('Employee not found', HttpStatus.NOT_FOUND);
@@ -30,7 +31,7 @@ export default class EmployeeService {
   }
 
   async create(employeeData: CreateEmployeeDto): Promise<Partial<IEmployee>> {
-    const userCpf = await this.employeeRepository.getEmployeeByCPF(
+    const userCpf = await this.employeeRepository.getEmployeeCPFOrId(
       employeeData.cpf,
     );
 
@@ -68,7 +69,7 @@ export default class EmployeeService {
       throw new HttpException('CPF is required', HttpStatus.BAD_REQUEST);
     }
 
-    const user = await this.employeeRepository.getEmployeeByCPF(cpf);
+    const user = await this.employeeRepository.getEmployeeCPFOrId(cpf);
 
     if (!user) {
       throw new HttpException('Employee not found', HttpStatus.NOT_FOUND);
