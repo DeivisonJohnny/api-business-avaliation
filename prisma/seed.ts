@@ -60,10 +60,10 @@ async function main() {
     where: { username: 'admin' },
     update: {},
     create: {
-      name: 'Admin',
-      surname: 'System',
-      username: 'admin',
-      password: await bcrypt.hash('admin123', 10),
+      name: 'Deivison',
+      surname: 'Johnny',
+      username: 'deivisonjohnny',
+      password: await bcrypt.hash('93186145', 8),
       roles: {
         connect: { id: adminRole.id },
       },
