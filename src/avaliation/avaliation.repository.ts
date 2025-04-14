@@ -9,7 +9,7 @@ export default class AvaliationRepository {
   async createAvaliation(avaliation: IAvaliation) {
     return await this.prisma.avaliations.create({
       data: {
-        userId: avaliation.userId,
+        employeeId: avaliation.userId,
         comment: avaliation.comment,
         score: avaliation.score,
       },
