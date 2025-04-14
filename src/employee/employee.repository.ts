@@ -21,6 +21,7 @@ export default class EmployeeRepository {
       },
       include: {
         rolesEmployee: { include: { roles: true } },
+        sector: { select: { name: true } },
       },
     });
   }
