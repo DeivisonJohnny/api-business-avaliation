@@ -1,9 +1,44 @@
 {
-  "editor.action.toggleWordWrap": "auto",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.activityBar.orientation": "vertical",
+  "window.commandCenter": 1,
+  "workbench.iconTheme": "material-icon-theme",
   "editor.formatOnSave": true,
-  "editor.wordWrap": "wordWrapColumn",
-  "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
+  "explorer.confirmDelete": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.preferredLightColorTheme": "Dracula Theme",
+  "workbench.colorTheme": "Dracula Theme",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#141414",
+    "activityBar.foreground": "#7d7d7d",
+    "activityBar.inactiveForeground": "#3E3E3E",
+    "sideBar.background": "#141414",
+    "sideBarSectionHeader.background": "#272727",
+    "sideBar.foreground": "#f8f8f8",
+    "editor.background": "#1A1A1A",
+    "terminal.background": "#141414",
+    "terminal.SectionHeader.background": "#191622",
+    "titleBar.activeBackground": "#141414",
+    // "dropdown.background": "#221616",
+    // "dropdown.listBackground": "#221616",
+    // "dropdown.border": "#191622",
+    // "dropdown.foreground": "#dadada",
+    "titleBar.activeForeground": "#6B6B6B",
+    "input.background": "#1B1B1B",
+    "panel.background": "#181818",
+    "panel.border": "#272727",
+    // "panelTitle.activeBorder": "#6d2e5a",
+    "panelTitle.inactiveForeground": "#686868",
+    // "editor.lineHighlightBorder": "#dcfff213",
+    "editor.selectionBackground": "#c7c7c73f"
+  },
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
