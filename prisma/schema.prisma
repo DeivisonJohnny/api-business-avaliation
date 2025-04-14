@@ -8,13 +8,12 @@ datasource db {
 }
 
 model User {
-  id          String        @id @default(uuid())
-  name        String
-  surname     String
-  username    String        @unique
-  password    String
-  roles       RoleUser[]
-  Avaliations Avaliations[]
+  id       String     @id @default(uuid())
+  name     String
+  surname  String
+  username String     @unique
+  password String
+  roles    RoleUser[]
 }
 
 model RoleUser {
@@ -42,6 +41,7 @@ model Employee {
   roleEmployeesId String?
   sector          Sector?        @relation(fields: [sectorId], references: [id])
   sectorId        String?
+  Avaliations     Avaliations[]
 }
 
 model RoleEmployees {
@@ -73,10 +73,10 @@ enum Shift {
 model Avaliations {
   id String @id @default(uuid())
 
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String
-  score   Float
-  comment String @db.VarChar(255)
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  employeeId String
+  score      Float
+  comment    String   @db.VarChar(255)
 
   createAt DateTime @default(now())
   updateAt DateTime @default(now())
