@@ -36,7 +36,7 @@ export class AuthService {
     const { hours, minutes, seconds } = this.token.getTimeExpire(token);
 
     return {
-      message: 'Login successful',
+      message: 'Successful',
       token: token,
       expiresIn: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
     };

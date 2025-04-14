@@ -8,8 +8,6 @@ export class AuthController {
 
   @Post('/login')
   async login(@Body() data: IAuthLogin) {
-    const user = await this.authService.login(data);
-
-    return { message: 'Login successful', ...user };
+    return this.authService.login(data);
   }
 }
