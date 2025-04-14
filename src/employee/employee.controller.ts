@@ -20,7 +20,9 @@ export default class EmployeeController {
   async getEmployeeByCPF(
     @Param('identification') identification: string,
   ): Promise<IEmployee> {
-    identification = this.utilsService.formatCPF(identification);
+    if (identification.length == 11 || identification.length == 14) {
+      identification = this.utilsService.formatCPF(identification);
+    }
     return await this.employeeService.getByIdentification(identification);
   }
 

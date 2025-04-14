@@ -15,8 +15,10 @@ export default class EmployeeRepository {
   }
 
   async getEmployeeCPFOrId(identification: string): Promise<IEmployee> {
-    return await this.prisma.employee.findUnique({
-      where: { cpf: identification },
+    return await this.prisma.employee.findFirst({
+      where: {
+        OR: [{ cpf: identification }, { id: identification }],
+      },
       include: {
         rolesEmployee: { include: { roles: true } },
       },
