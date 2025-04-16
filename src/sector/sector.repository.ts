@@ -16,6 +16,18 @@ export class SectorRepository {
     });
   }
 
+  async getAll() {
+    const listSector = await this.prisma.sector.findMany({
+      include: {
+        _count: {
+          select: { employees: true },
+        },
+      },
+    });
+    const countSector = await this.prisma.sector.count();
+    return { listSector, count: countSector };
+  }
+
   async create(sector: ISector) {
     return this.prisma.sector.create({
       data: {

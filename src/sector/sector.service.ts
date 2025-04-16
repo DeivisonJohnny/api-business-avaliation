@@ -6,6 +6,10 @@ import { SectorRepository } from './sector.repository';
 export default class SectorService {
   constructor(readonly sectorRepository: SectorRepository) {}
 
+  async getListAll() {
+    return this.sectorRepository.getAll();
+  }
+
   async createSector(sector: ISector) {
     const sectorId = await this.sectorRepository.getWithId(
       sector.name.toLowerCase().replace(/\s+/g, ''),
