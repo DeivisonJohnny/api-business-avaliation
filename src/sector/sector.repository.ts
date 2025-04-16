@@ -17,7 +17,7 @@ export class SectorRepository {
   }
 
   async getAll() {
-    const listSector = await this.prisma.sector.findMany({
+    const sector = await this.prisma.sector.findMany({
       include: {
         _count: {
           select: { employees: true },
@@ -25,7 +25,7 @@ export class SectorRepository {
       },
     });
     const countSector = await this.prisma.sector.count();
-    return { listSector, count: countSector };
+    return { sector, countSector };
   }
 
   async create(sector: ISector) {
